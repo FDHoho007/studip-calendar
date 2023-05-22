@@ -33,7 +33,7 @@ function shareUrl() {
     if(navigator.share && isLoggedIn())
         navigator.share({
             title: document.title,
-            text: "Hello World",
+            text: "Here you have my personal StudIP calendar. Please consider sharing yours with me as well :)",
             url: location.origin + location.pathname + "#" + encodeCalendar(self)
         })
         .catch(error => console.log('Error sharing:', error));
