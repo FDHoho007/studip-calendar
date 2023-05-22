@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <title>StudIP Calendar</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Fabian Dietrich">
+    <link rel="stylesheet" href="assets/style.css">
+    <script src="assets/js/calendar.js"></script>
+    <script src="assets/js/users.js"></script>
+    <script src="assets/js/app.js" defer></script>
+
+</head>
+
+<body>
+
+    <div id="loading"></div>
+    <div id="login" style="display: none;">
+
+        <h1>StudIP Calendar</h1>
+
+        <p>
+            This mobile app allows you to share your StudIP calendar with your friends 
+            and view all of your calendars in one place, so you can arrange lunch 
+            or other gatherings in the most efficient way.
+        </p>
+    
+        <p>
+            To get started, please choose a display name that is shown to your friends 
+            as well as a color for events of your personal StudIP calendar.
+        </p>
+
+        <input type="text" id="login-displayName" placeholder="Your display name" required>
+        <input type="color" id="login-calendarColor" required>
+
+        <p>
+            Next up you will need your personal StudIP calendar ics url. 
+            You can retrieve it from <a href="https://studip.uni-passau.de/studip/dispatch.php/calendar/single/share">
+                studip.uni-passau.de/studip/dispatch.php/calendar/single/share</a>
+        </p>
+
+        <input type="text" id="login-calendarICSUrl" placeholder="Your StudIP ics url" required>
+        <br><br>
+        <button type="button" onclick="login();">Get started</button>
+
+    </div>
+    <div id="calendar" style="display: none;">
+        <header>
+            <div class="row title-row"><button onclick="shareUrl();"><img src="assets/svg/share.svg"></img></button><span>StudIP Calendar</span><button onclick="logout();"><img src="assets/svg/box-arrow-right.svg"></img></button></div>
+        </header>
+    </div>
+
+</body>
+
+</html>
