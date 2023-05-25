@@ -1,11 +1,27 @@
-const CORS_PROXY = "https://cors.fdhoho007.de/";
+const CORS_PROXY = "https://cors-proxy.fdhoho007.de/";
 
-function checkICSUrl(ics_url) {
-    return new Promise((resolve) => resolve());
+async function checkICSUrl(ics_url) {
+    const r = await fetch(CORS_PROXY + ics_url);
+    let ics_text = await r.text();
+    return ics_text.startsWith("BEGIN:VCALENDAR");
 }
 
-function getCalendar(ics_url) {
-    return fetch(CORS_PROXY + ics_url).text();
+async function getCalendarFromICS(ics_url) {
+    const r = await fetch(CORS_PROXY + ics_url);
+    let ics_text = await r.text();
+    return parseICS(ics_text);
+}
+
+async function getAllCalendars() {
+    let calendars = [];
+    for(let calData of getCalendarData()) {
+        let cal = {
+            ...calData,
+            ...(await getCalendarFromICS(calData.icsUrl))
+        }
+        calendars.push(cal);
+    }
+    return calendars;
 }
 
 function encodeCalendar(calendar) {

@@ -7,6 +7,35 @@ self = localStorage.getItem("self");
 if(self != null)
     self = decodeCalendar(self);
 
+if(location.hash) {
+    let calImport = location.hash.substring(1).split(";");
+    if(calImport.length == 1) {
+        let cal = decodeCalendar(calImport[0]);
+        if(cal != null && confirm("You are trying to import " + cal.displayName + "'s studip calendar."))
+        importCalendarData(calImport[0]);
+    }
+    else if(confirm("You are trying to import " + calImport.length + " studip calendars."))
+        calImport.forEach(cal => importCalendarData(cal));
+    location.href = location.origin + location.pathname;
+}
+
+async function importCalendarData(calendar) {
+    calendar = decodeCalendar(calendar);
+    if(calendar != null && calendar != self && await checkICSUrl(calendar.icsUrl)) {
+        if(localStorage.getItem("calendars") == null)
+            localStorage.setItem("calendars", encodeCalendar(calendar));
+        else
+            localStorage.setItem("calendars", localStorage.getItem("calendars") + ";" + encodeCalendar(calendar));
+    }
+}
+
+function getCalendarData() {
+    let calendars = [self];
+    if(localStorage.getItem("calendars") != null)
+        localStorage.getItem("calendars").split(";").forEach(cal => calendars.push(decodeCalendar(cal)));
+    return calendars;
+}
+
 function login() {
     let calendar = {
         "displayName": document.getElementById("login-displayName").value,
