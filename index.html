@@ -49,8 +49,42 @@
     </div>
     <div id="calendar" style="display: none;">
         <header>
-            <div class="row title-row"><button onclick="shareUrl();" oncontextmenu="exportCalendars(); return false;"><img src="assets/svg/share.svg"></img></button><span>StudIP Calendar</span><button onclick="logout();"><img src="assets/svg/box-arrow-right.svg"></img></button></div>
+            <div class="row title-row">
+                <button onclick="shareUrl();" oncontextmenu="exportCalendars(); return false;"><img src="assets/svg/share.svg"></img></button>
+                <span>StudIP Calendar</span>
+                <button onclick="logout();"><img src="assets/svg/box-arrow-right.svg"></img></button>
+            </div>
         </header>
+        <nav>
+            <div class="row">
+                <button onclick="navigateBack();"><img src="assets/svg/arrow-left.svg"></img></button>
+                <span id="date-title" onclick="navigateToDate();"></span>
+                <button onclick="navigateForward();"><img src="assets/svg/arrow-right.svg"></img></button>
+            </div>
+        </nav>
+        <div id="schedule">
+            <div class="timeline">
+                <div class="spacer"></div>
+                <div class="time-marker">08:00</div>
+                <div class="time-marker">09:00</div>
+                <div class="time-marker">10:00</div>
+                <div class="time-marker">11:00</div>
+                <div class="time-marker">12:00</div>
+                <div class="time-marker">13:00</div>
+                <div class="time-marker">14:00</div>
+                <div class="time-marker">15:00</div>
+                <div class="time-marker">16:00</div>
+                <div class="time-marker">17:00</div>
+                <div class="time-marker">18:00</div>
+                <div class="time-marker">19:00</div>
+                <div class="time-marker">20:00</div>
+                <div class="time-marker">21:00</div>
+                <div class="time-marker">22:00</div>
+            </div>
+            <div class="calendars">
+
+            </div>
+        </div>
     </div>
 
 </body>

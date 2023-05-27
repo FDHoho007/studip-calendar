@@ -12,6 +12,18 @@ async function getCalendarFromICS(ics_url) {
     return parseICS(ics_text);
 }
 
+function eventsByDate(calendar) {
+    let events = {};
+    for(let event of calendar.VEVENT) {
+        let dtstart = event["DTSTART"];
+        dtstart = dtstart.getDate() + "." + (dtstart.getMonth()+1) + "." + dtstart.getFullYear();
+        if(!(dtstart in events))
+            events[dtstart] = [];
+        events[dtstart].push(event);
+    }
+    return events;
+}
+
 async function getAllCalendars() {
     let calendars = [];
     for(let calData of getCalendarData()) {
@@ -19,6 +31,12 @@ async function getAllCalendars() {
             ...calData,
             ...(await getCalendarFromICS(calData.icsUrl))
         }
+        let TZID = cal.VCALENDAR.VTIMEZONE.TZID;
+        for(let event of cal.VCALENDAR.VEVENT) {
+            event["DTSTART"] = icsDate(event["DTSTART;TZID=" + TZID]);
+            event["DTEND"] = icsDate(event["DTEND;TZID=" + TZID]);
+        }
+        cal["eventsByDate"] = eventsByDate(cal.VCALENDAR);
         calendars.push(cal);
     }
     return calendars;
