@@ -41,11 +41,8 @@ function parseICS(ics_content) {
                         else
                             currentObject[key] = [currentData, value];
                     }
-                    else {
+                    else
                         currentObject[key] = value;
-                        if(key == "SUMMARY")
-                            console.log(value);
-                    }
                     currentKey = key;
                 }
             }
