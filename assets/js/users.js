@@ -67,3 +67,12 @@ function shareUrl() {
         })
         .catch(error => console.log('Error sharing:', error));
 }
+
+function exportCalendars() {
+    if(confirm("You are about to export all your imported StudIP calendars. Do you want to continue?")) {
+        setTimeout(() => {
+            navigator.clipboard.writeText(location.origin + location.pathname + "#" + localStorage.getItem("self") + (localStorage.getItem("calendars") != null ? ";" + localStorage.getItem("calendars"): ""));
+            alert("An export link has been copied to your clipboard.");
+        }, 1);
+    }
+}
