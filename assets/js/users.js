@@ -12,11 +12,14 @@ if(location.hash) {
     if(calImport.length == 1) {
         let cal = decodeCalendar(calImport[0]);
         if(cal != null && confirm("You are trying to import " + cal.displayName + "'s studip calendar."))
-        importCalendarData(calImport[0]);
+            importCalendarData(calImport[0]).then(() => location.href = location.origin + location.pathname);
     }
-    else if(confirm("You are trying to import " + calImport.length + " studip calendars."))
+    else if(confirm("You are trying to import " + calImport.length + " studip calendars.")) {
         calImport.forEach(cal => importCalendarData(cal));
-    location.href = location.origin + location.pathname;
+        setTimeout(() => location.href = location.origin + location.pathname, 10*1000);
+    }
+    else
+        location.href = location.origin + location.pathname;
 }
 
 async function importCalendarData(calendar) {
@@ -73,6 +76,6 @@ function exportCalendars() {
         setTimeout(() => {
             navigator.clipboard.writeText(location.origin + location.pathname + "#" + localStorage.getItem("self") + (localStorage.getItem("calendars") != null ? ";" + localStorage.getItem("calendars"): ""));
             alert("An export link has been copied to your clipboard.");
-        }, 1);
+        }, 100);
     }
 }

@@ -29,7 +29,7 @@ body {
     gap: 10px;
     grid-template-columns: auto 1fr;
     padding: 1rem;
-    max-height: calc(100vh - 112px - 2rem);
+    max-height: calc(100vh - 137px - 2rem);
     overflow-y: scroll;
     --numHours: 15;
     --timeHeight: 60px;
@@ -37,20 +37,21 @@ body {
   
 .timeline {
     display: grid;
-    grid-template-rows: repeat(var(--numHours), var(--timeHeight));
+    grid-template-rows: 30px repeat(var(--numHours), var(--timeHeight));
+    gap: 10px;
 }
 
 .calendars {
     display: grid;
     grid-column: 2;
-    gap: 5px;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    grid-template-columns: repeat(4, minmax(50px, 1fr));
 }
 
 .events {
     display: grid;
     grid-template-rows: repeat(var(--numHours), var(--timeHeight));
     border-radius: 5px;
+    gap: 10px;
 }
 
 .event {
@@ -58,17 +59,21 @@ body {
     border-radius: 5px;
     padding: 0.5rem;
     margin: 0 0.5rem;
-    background: white;
+    overflow: hidden;
 }
 
 .event > .title {
+    font-size: 11pt;
     font-weight: 600;
     margin-bottom: 0.25rem;
+    margin-top: 0.3rem;
 }
 
 .space,
 .calendar > .title {
-  height: 60px
+    height: 30px;
+    text-align: center;
+    font-weight: 600;
 }
 
 .start-8 {
