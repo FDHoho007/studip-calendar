@@ -15,7 +15,7 @@ function parseICS(ics_content) {
             else {
                 let data = line.split(":");
                 let key = data[0].trim();
-                let value = data[1].trim().replaceAll("\\,", ",");
+                let value = data.slice(1).join(":").trim().replaceAll("\\,", ",");
                 if(key == "BEGIN") {
                     stack.push(currentObject);
                     currentObject = {};
@@ -41,8 +41,11 @@ function parseICS(ics_content) {
                         else
                             currentObject[key] = [currentData, value];
                     }
-                    else
+                    else {
                         currentObject[key] = value;
+                        if(key == "SUMMARY")
+                            console.log(value);
+                    }
                     currentKey = key;
                 }
             }
