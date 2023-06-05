@@ -16,6 +16,7 @@ async function createSchedule() {
         c.domElement.appendChild(events);
         document.querySelector("#schedule .calendars").appendChild(c.domElement);
     }
+    document.getElementById("schedule").style.setProperty("--numCalendars", calendars.length);
     renderSchedule();
 }
 

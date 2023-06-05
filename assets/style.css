@@ -16,7 +16,7 @@ body {
     border-bottom: 1px solid grey;
     display: flex;
     justify-content: space-around;
-    padding: 15px;
+    padding: 25px;
     font-size: 16pt;
 }
 
@@ -33,6 +33,7 @@ body {
     overflow-y: scroll;
     --numHours: 15;
     --timeHeight: 60px;
+    --numCalendars: 1;
 }
   
 .timeline {
@@ -44,7 +45,7 @@ body {
 .calendars {
     display: grid;
     grid-column: 2;
-    grid-template-columns: repeat(4, minmax(50px, 1fr));
+    grid-template-columns: repeat(--numCalendars, minmax(50px, 1fr));
 }
 
 .events {
